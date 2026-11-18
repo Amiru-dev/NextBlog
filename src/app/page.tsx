@@ -53,7 +53,7 @@ export default function Home() {
             View Blog Posts
           </a>
           <a
-            href="/pages"
+            href="/pages/home"
             className="inline-block px-6 py-3 border rounded-lg hover:bg-gray-50 transition"
           >
             Pages Router Example
