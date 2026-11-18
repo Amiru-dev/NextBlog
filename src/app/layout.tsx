@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NextBlog - Full-Stack Next.js 15 Platform",
+  title: "NextBlog",
   description: "A comprehensive blog platform showcasing all Next.js features",
 };
 
