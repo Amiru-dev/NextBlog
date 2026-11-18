@@ -1,0 +1,33 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "DATABASE_URL": {
+      "description": "MySQL database connection string"
+    },
+    "AUTH_SECRET": {
+      "description": "NextAuth.js secret key",
+      "generator": "secret"
+    },
+    "AUTH_URL": {
+      "description": "NextAuth.js URL",
+      "value": "https://your-domain.vercel.app"
+    },
+    "AUTH_GOOGLE_ID": {
+      "description": "Google OAuth client ID (optional)"
+    },
+    "AUTH_GOOGLE_SECRET": {
+      "description": "Google OAuth client secret (optional)"
+    },
+    "AUTH_GITHUB_ID": {
+      "description": "GitHub OAuth client ID (optional)"
+    },
+    "AUTH_GITHUB_SECRET": {
+      "description": "GitHub OAuth client secret (optional)"
+    }
+  }
+}
