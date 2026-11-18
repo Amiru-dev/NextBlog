@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "../auth";
+import { auth } from "@/auth";
 
 // 1. Specify protected and public routes
 const protectedRoutes = ["/admin"];
