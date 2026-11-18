@@ -1,6 +1,6 @@
-# NextBlog - Full-Stack Next.js 15 Blog Platform
+# NextBlog - Full-Stack Next.js 16 Blog Platform
 
-A comprehensive blog platform showcasing all 11 Next.js features in a cohesive application. Built with Next.js 15, TypeScript, Tailwind CSS, NextAuth.js, Prisma, and MySQL.
+A comprehensive blog platform showcasing all 11 Next.js features in a cohesive application. Built with Next.js 16, TypeScript, Tailwind CSS, NextAuth.js, Prisma, and MySQL.
 
 ## 🚀 Features
 
@@ -20,11 +20,11 @@ A comprehensive blog platform showcasing all 11 Next.js features in a cohesive a
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15
+- **Framework**: Next.js 16
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS v3
 - **Authentication**: NextAuth.js v5 (credentials + Google/GitHub OAuth)
-- **Database**: Prisma ORM + MySQL
+- **Database**: Prisma ORM v5 + MySQL
 - **Deployment**: Docker, Vercel
 - **Password Hashing**: bcryptjs
 
@@ -49,6 +49,7 @@ nextblog/
 │   │   ├── layout.tsx         # Root layout
 │   │   └── page.tsx           # Home page (SSG)
 │   ├── pages/                 # Pages Router (minimal examples)
+│   │   ├── home.tsx           # Pages Router home
 │   │   ├── legacy/            # Legacy routing examples
 │   │   ├── _app.tsx
 │   │   └── _document.tsx
@@ -60,15 +61,14 @@ nextblog/
 │   │   ├── prisma.ts          # Prisma Client
 │   │   ├── auth-utils.ts      # Auth utilities
 │   │   └── utils.ts           # General utilities
-│   └── middleware.ts          # Route protection middleware
+│   ├── auth.ts                # NextAuth configuration
+│   └── proxy.ts               # Route protection middleware
 ├── prisma/
 │   ├── schema.prisma          # Database schema
 │   └── seed.ts                # Seed data script
-├── auth.ts                    # NextAuth configuration
 ├── Dockerfile                 # Docker configuration
 ├── docker-compose.yml         # Docker Compose for local dev
-├── vercel.json                # Vercel deployment config
-└── .env.example               # Environment variables template
+└── vercel.json                # Vercel deployment config
 ```
 
 ## 🚦 Getting Started
@@ -93,10 +93,7 @@ nextblog/
    ```
 
 3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   ```
-   Then edit `.env` with your configuration:
+   Create a `.env` file in the project root with your configuration:
    ```env
    DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"
    AUTH_SECRET="your-secret-key-generate-with-openssl-rand-base64-32"
@@ -117,7 +114,11 @@ nextblog/
 
 5. **Generate AUTH_SECRET**
    ```bash
+   # Using OpenSSL (if available)
    openssl rand -base64 32
+
+   # Or using Node.js
+   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
    ```
    Copy the output and set it as `AUTH_SECRET` in your `.env` file.
 
@@ -180,6 +181,15 @@ docker run -p 3000:3000 -e DATABASE_URL="your-db-url" -e AUTH_SECRET="your-secre
      nextblog
    ```
 
+## 🌐 Access Points
+
+- **Home**: http://localhost:3000
+- **Blog**: http://localhost:3000/blog
+- **Login**: http://localhost:3000/login
+- **Register**: http://localhost:3000/register
+- **Admin Dashboard**: http://localhost:3000/admin (requires login)
+- **Pages Router Example**: http://localhost:3000/pages/home
+
 ## 📝 Usage
 
 ### Authentication
@@ -189,6 +199,10 @@ docker run -p 3000:3000 -e DATABASE_URL="your-db-url" -e AUTH_SECRET="your-secre
   - Email/password (credentials)
   - Google OAuth (if configured)
   - GitHub OAuth (if configured)
+
+**Test Credentials** (from seed data):
+- Email: demo@example.com
+- Password: password123
 
 ### Blog Management
 
@@ -262,7 +276,7 @@ npm run db:seed      # Seed database with sample data
 
 ### App Router vs Pages Router
 - **App Router**: Visit `/blog` to see modern routing
-- **Pages Router**: Visit `/pages` to see legacy routing
+- **Pages Router**: Visit `/pages/home` to see legacy routing
 
 ### Server vs Client Components
 - **Server Components**: Blog list, individual posts (default)
